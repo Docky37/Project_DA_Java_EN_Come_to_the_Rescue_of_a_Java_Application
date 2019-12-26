@@ -2,7 +2,7 @@ package com.hemebiotech.analytics;
 
 import java.io.FileWriter;
 import java.util.List;
-import java.util.ListIterator;
+import java.util.TreeMap;
 
 /**
  * Main Class of the application, AnalyticsCounter contains: 
@@ -55,19 +55,9 @@ public class AnalyticsCounter {
 		 * For now it is only a small adaptation of Alex'job using 
 		 * the result List<String> returned by Caroline Class & method.
 		 */
-		ListIterator<String> iterator = result.listIterator();
-		String symptom;
-		while (iterator.hasNext()) {
-			symptom = iterator.next();
-			System.out.println("symptom from file: " + symptom);
-			if (symptom.equals("headache")) {
-				headacheCount++;
-			} else if (symptom.equals("rash")) {
-				rashCount++;
-			} else if (symptom.contains("pupils")) {
-				pupilCount++;
-			}
-		}
+		ICountOccurrences countSymptomFromArray = new CountSymptomFromArray(result);
+		TreeMap<String,Integer> countResult = countSymptomFromArray.CountOccurrences();
+		System.out.println(countResult);
 
 		/** Part 4: generate output (Need to be rewrite)
 		 */
