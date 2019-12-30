@@ -48,7 +48,7 @@ public class AnalyticsCounter {
 		 * In first we create an instance of ReadSymptomDataFromFile class with @param filepath.
 		 * Then we call the 'GetSymymptoms()' method.
 		 */
-		ReadSymptomDataFromFile readMyFile = new ReadSymptomDataFromFile(filepath);
+		ISymptomReader readMyFile = new ReadSymptomDataFromFile(filepath);
 		List<String> result = readMyFile.GetSymptoms();
 
 		/** Part 3: Count the occurrences of each symptom  (still needs to be done)
