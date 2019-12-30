@@ -5,18 +5,27 @@ import java.util.TreeMap;
 
 /**
  * <h1>AnalyticsCounter</h1>
+<<<<<<< HEAD
  * Main Class of the application, AnalyticsCounter contains:
+=======
+ * Main Class of the application, AnalyticsCounter contains: 
+>>>>>>> cf7b344... doc: create class and interface javadoc
  * <ul>
  * <li>the 'public static void main' function (entry point of any java program),</li>
  * <li>the 'analyticsCounterSupervisor' method.</li>
  * </ul>
  * 
+<<<<<<< HEAD
  * @author Alex and Docky37
+=======
+ * @author Alex and Docky
+>>>>>>> cf7b344... doc: create class and interface javadoc
  *
  */
 public class AnalyticsCounter {
 
 	/**
+<<<<<<< HEAD
      * <h1>Main function</h1>
      * The main function, entry point of the program.
      * Its only goal is to call the analyticsCounterSupervisor() method.
@@ -24,11 +33,21 @@ public class AnalyticsCounter {
      * @param args not used
      * @throws Exception
      */
+=======
+	 * <h1>Main function</h1>
+	 * The main function, entry point of the program. 
+	 * Its only goal is to call the analyticsCounterSupervisor() method.
+	 * 
+	 * @param args not used  
+	 * @throws Exception
+	 */
+>>>>>>> cf7b344... doc: create class and interface javadoc
 	public static void main(String args[]) throws Exception {
 		AnalyticsCounterSupervisor();
 	}
 
 	/**
+<<<<<<< HEAD
      * <h1>analyticsCounterSupervisor()</h1>
      * The 'analyticsCounterSupervisor()' monitors the application.
      * It calls sequentially each principal function of the program:
@@ -37,10 +56,21 @@ public class AnalyticsCounter {
      * <li>read the file,
      * <li>count the occurrences of each symptom,
      * <li>generate the file output.
+=======
+	 * <h1>analyticsCounterSupervisor()</h1>
+	 * The 'analyticsCounterSupervisor()' monitors the application. 
+	 * It calls sequentially each principal function of the program:
+	 * <ul>
+	 * <li>get the filepath of the file we want to read,
+	 * <li>read the file,
+	 * <li>count the occurrences of each symptom,
+	 * <li>generate the file output.
+>>>>>>> cf7b344... doc: create class and interface javadoc
 	 * 
 	 * @throws Exception
 	 */
 	private static void AnalyticsCounterSupervisor() throws Exception {
+<<<<<<< HEAD
 		/*
 		 * First part: an external method call to get the filePath. 
 		 * Create an instance of SelectFileToRead. 
@@ -96,6 +126,29 @@ public class AnalyticsCounter {
 		 * (the TreeMap returned previously). 
 		 * Then call its 'WriteInFile()' method that write the countResult in a textFile 
 		 * and return a boolean used to confirm that job is well done.
+=======
+		/* First part: an external method call to get the filePath (still needs to be done)
+		 * The filepath variable is temporarily set here, until external method implementation.
+		 */
+		String filepath = "symptoms.txt";
+
+		/*Second part: Caroline's ReadSymptomDataFromFile sub-program call
+		 * In first we create an instance of ReadSymptomDataFromFile class with @param filepath.
+		 * Then we call the 'GetSymptoms()' method.
+		 */
+		ISymptomReader readMyFile = new ReadSymptomDataFromFile(filepath);
+		List<String> result = readMyFile.GetSymptoms();
+
+		/* Part 3: Count the occurrences of each symptom  (still needs to be done)
+		 * For now it is only a small adaptation of Alex'job using 
+		 * the result List<String> returned by Caroline Class & method.
+		 */
+		ICountOccurrences countSymptomFromArray = new CountSymptomFromArray(result);
+		TreeMap<String,Integer> countResult = countSymptomFromArray.CountOccurrences();
+		System.out.println(countResult);
+
+		/* Part 4: generate output (Need to be rewrite)
+>>>>>>> cf7b344... doc: create class and interface javadoc
 		 */
 		IWriteATreeMapInATextFile writeFile = new WriteCountResultInFile(countResult);
 		boolean fileCreated = writeFile.WriteInFile();
