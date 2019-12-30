@@ -2,7 +2,7 @@ package com.hemebiotech.analytics;
 
 import java.io.FileWriter;
 import java.util.List;
-import java.util.ListIterator;
+import java.util.TreeMap;
 
 /**
  * Main Class of the application, AnalyticsCounter contains: 
@@ -48,26 +48,16 @@ public class AnalyticsCounter {
 		 * In first we create an instance of ReadSymptomDataFromFile class with @param filepath.
 		 * Then we call the 'GetSymymptoms()' method.
 		 */
-		ReadSymptomDataFromFile readMyFile = new ReadSymptomDataFromFile(filepath);
+		ISymptomReader readMyFile = new ReadSymptomDataFromFile(filepath);
 		List<String> result = readMyFile.GetSymptoms();
 
 		/** Part 3: Count the occurrences of each symptom  (still needs to be done)
 		 * For now it is only a small adaptation of Alex'job using 
 		 * the result List<String> returned by Caroline Class & method.
 		 */
-		ListIterator<String> iterator = result.listIterator();
-		String symptom;
-		while (iterator.hasNext()) {
-			symptom = iterator.next();
-			System.out.println("symptom from file: " + symptom);
-			if (symptom.equals("headache")) {
-				headacheCount++;
-			} else if (symptom.equals("rash")) {
-				rashCount++;
-			} else if (symptom.contains("pupils")) {
-				pupilCount++;
-			}
-		}
+		ICountOccurrences countSymptomFromArray = new CountSymptomFromArray(result);
+		TreeMap<String,Integer> countResult = countSymptomFromArray.CountOccurrences();
+		System.out.println(countResult);
 
 		/** Part 4: generate output (Need to be rewrite)
 		 */
