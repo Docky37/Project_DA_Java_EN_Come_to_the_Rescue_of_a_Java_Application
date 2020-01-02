@@ -4,31 +4,39 @@ import java.util.List;
 import java.util.TreeMap;
 
 /**
- * Main Class of the application, AnalyticsCounter contains: - the 'public
- * static void main' function (entry point of any java program), - the
- * 'analyticsCounterSupervisor' method.
+ * <h1>AnalyticsCounter</h1>
+ * Main Class of the application, AnalyticsCounter contains:
+ * <ul>
+ * <li>the 'public static void main' function (entry point of any java program),</li>
+ * <li>the 'analyticsCounterSupervisor' method.</li>
+ * </ul>
  * 
- * @author docky
+ * @author Alex and Docky37
  *
  */
 public class AnalyticsCounter {
 
 	/**
-	 * The main function, entry point of the program. Its only goal is to call the
-	 * analyticsCounterSupervisor() method.
-	 * 
-	 * @param args
-	 * @throws Exception
-	 */
+     * <h1>Main function</h1>
+     * The main function, entry point of the program.
+     * Its only goal is to call the analyticsCounterSupervisor() method.
+     *
+     * @param args not used
+     * @throws Exception
+     */
 	public static void main(String args[]) throws Exception {
 		AnalyticsCounterSupervisor();
 	}
 
 	/**
-	 * The 'analyticsCounterSupervisor()' monitors the application. It calls
-	 * sequentially each principal function of the program: - get the filepath of
-	 * the file we want to read, - read the file, - count the occurrences of each
-	 * symptom, - generate the file output.
+     * <h1>analyticsCounterSupervisor()</h1>
+     * The 'analyticsCounterSupervisor()' monitors the application.
+     * It calls sequentially each principal function of the program:
+     * <ul>
+     * <li>get the filepath of the file we want to read,
+     * <li>read the file,
+     * <li>count the occurrences of each symptom,
+     * <li>generate the file output.
 	 * 
 	 * @throws Exception
 	 */
