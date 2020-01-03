@@ -12,7 +12,7 @@ import java.util.TreeMap;
  * this symptom in the list.
  * 
  * @author docky
- *
+ * @since 25-12-2019
  */
 public class CountSymptomFromArray implements ICountOccurrences {
 

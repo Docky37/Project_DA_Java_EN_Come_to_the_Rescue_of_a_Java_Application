@@ -8,20 +8,18 @@ package com.hemebiotech.analytics;
 /**
  * <h1>Class SelectFileToRead</h1>
  * @author docky
- *
+ * @since 02-01-2020
  */
 public class SelectFileToRead implements ISelectFileAndGetFilepath {
 
 	/**
-	 * Class constructor 
+	 * <h1>Method SelectFile()</h1>
+	 * <p>
+	 * The method SelectFile() creates a dialogue window that allows user to select
+	 * a file and get its absolute path.
+	 * </p>
 	 * 
-	 */
-	public SelectFileToRead() {
-		
-	}
-	
-	/**
-	 * 
+	 * @return String filepath of the selected file
 	 */
 	@Override
 	public String SelectFile() {
