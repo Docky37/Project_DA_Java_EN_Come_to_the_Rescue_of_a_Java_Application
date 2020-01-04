@@ -11,6 +11,6 @@ public interface ISelectFileAndGetFilepath {
 	 * 
 	 * @return
 	 */
-	String SelectFile();
+	String selectFile();
 
 }

@@ -49,7 +49,7 @@ public class WriteCountResultInFile implements IWriteATreeMapInATextFile {
 	 * @return true if the file is written without trouble (false if not)
 	 */
 	@Override
-	public boolean WriteInFile() {
+	public boolean writeInFile() {
 		boolean fileCreated = false;
 		// Create EntrySet of the MapTree
 		Set<Entry<String, Integer>> set = countResult.entrySet();

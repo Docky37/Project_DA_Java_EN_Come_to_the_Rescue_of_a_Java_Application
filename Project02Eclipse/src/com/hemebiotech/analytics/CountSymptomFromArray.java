@@ -49,7 +49,7 @@ public class CountSymptomFromArray implements ICountOccurrences {
 	 * @return the TreeMap
 	 */
 	@Override
-	public TreeMap<String, Integer> CountOccurrences() {
+	public TreeMap<String, Integer> countOccurrences() {
 		TreeMap<String, Integer> countResult = new TreeMap<>();
 
 		ListIterator<String> iterator = list.listIterator();

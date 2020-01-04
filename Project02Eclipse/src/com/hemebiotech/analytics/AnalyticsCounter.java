@@ -25,7 +25,7 @@ public class AnalyticsCounter {
      * @throws Exception
      */
 	public static void main(String args[]) throws Exception {
-		AnalyticsCounterSupervisor();
+		analyticsCounterSupervisor();
 	}
 
 	/**
@@ -40,15 +40,15 @@ public class AnalyticsCounter {
 	 * 
 	 * @throws Exception
 	 */
-	private static void AnalyticsCounterSupervisor() throws Exception {
+	private static void analyticsCounterSupervisor() throws Exception {
 		/*
 		 * First part: an external method call to get the filePath. 
 		 * Create an instance of SelectFileToRead. 
 		 * Then call the 'SelectFile' method that returns the filePath
 		 * of the selected file.
 		 */
-		ISelectFileAndGetFilepath selectFile = new SelectFileToRead();
-		String filepath = selectFile.SelectFile();
+		ISelectFileAndGetFilepath selectFileToRead = new SelectFileToRead();
+		String filepath = selectFileToRead.selectFile();
 		 // If no selected file, the program is closed. 
 		if (filepath.equals("")){
 			System.out.println("End of program.");
@@ -61,8 +61,8 @@ public class AnalyticsCounter {
 		 * Create an instance of ReadSymptomDataFromFile class with @param filepath. 
 		 * Then call its 'GetSymptoms()' method that returns an ArrayList.
 		 */
-		ISymptomReader readMyFile = new ReadSymptomDataFromFile(filepath);
-		List<String> result = readMyFile.GetSymptoms();
+		ISymptomReader readSelectedFile = new ReadSymptomDataFromFile(filepath);
+		List<String> result = readSelectedFile.getSymptoms();
 		 // If the returned ArrayList is empty, the program is closed. 
 		if (result.isEmpty()){
 			System.out.println("\n" + "Part 2!!!");
@@ -80,7 +80,7 @@ public class AnalyticsCounter {
 		 * Then call its 'CountOccurrences()' method that returns a TreeMap.
 		 */
 		ICountOccurrences countSymptomFromArray = new CountSymptomFromArray(result);
-		TreeMap<String, Integer> countResult = countSymptomFromArray.CountOccurrences();
+		TreeMap<String, Integer> countResult = countSymptomFromArray.countOccurrences();
 		if (countResult.isEmpty()) {
 			System.out.println("\n" + "Part 3!!!");
 			System.out.println("The MapTree is empty");
@@ -97,10 +97,10 @@ public class AnalyticsCounter {
 		 * Then call its 'WriteInFile()' method that write the countResult in a textFile 
 		 * and return a boolean used to confirm that job is well done.
 		 */
-		IWriteATreeMapInATextFile writeFile = new WriteCountResultInFile(countResult);
-		boolean fileCreated = writeFile.WriteInFile();
+		IWriteATreeMapInATextFile writeCountResultInFile = new WriteCountResultInFile(countResult);
+		boolean fileCreated = writeCountResultInFile.writeInFile();
 		if (fileCreated) {
-			System.out.println("\n" + "Part 4 successfully done! File 'result.out' was written.");
+			System.out.println("\n" + "Part 4 successfully done! File 'result.out' was written. ");
 		} else {
 			System.out.println("\n" + "Part 4!!!");
 			System.out.println("Unable to write 'result.out'");

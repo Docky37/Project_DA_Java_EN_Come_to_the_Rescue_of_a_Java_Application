@@ -19,6 +19,6 @@ public interface IWriteATreeMapInATextFile {
 	 * 
 	 * @return true if the file is written without trouble (false if not)
 	 */
-	boolean WriteInFile();
+	boolean writeInFile();
 
 }

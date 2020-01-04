@@ -22,7 +22,7 @@ public class SelectFileToRead implements ISelectFileAndGetFilepath {
 	 * @return String filepath of the selected file
 	 */
 	@Override
-	public String SelectFile() {
+	public String selectFile() {
 		String filePath = "";
 		File localDirectory = null;
 		try {

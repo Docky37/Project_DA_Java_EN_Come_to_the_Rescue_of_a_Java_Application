@@ -23,6 +23,6 @@ public interface ICountOccurrences {
 	 * 
 	 * @return a TreeMap&lt;String, Integer&gt;
 	 */
-	TreeMap<String, Integer> CountOccurrences();
+	TreeMap<String, Integer> countOccurrences();
 
 }
