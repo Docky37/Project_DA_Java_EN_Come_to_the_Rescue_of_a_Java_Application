@@ -4,65 +4,88 @@ import java.util.List;
 import java.util.TreeMap;
 
 /**
- * Main Class of the application, AnalyticsCounter contains: 
- * 	- the 'public static void main' function (entry point of any java program),
- *  - the 'analyticsCounterSupervisor' method.
+ * <h1>Class AnalyticsCounter</h1>
+ * Main Class of the application, AnalyticsCounter contains:
+ * <ul>
+ * <li>the 'public static void main' function,</li>
+ * <li>the 'analyticsCounterSupervisor' method.</li>
+ * </ul>
  * 
- * @author docky
- *
+ * @author Alex (Heme Biotech) and Thierry Schreiner (OpenClassrooms student)
+ * @since 26-12-2019
  */
 public class AnalyticsCounter {
 
 	/**
-	 * The main function, entry point of the program. 
-	 * Its only goal is to call the analyticsCounterSupervisor() method.
-	 * 
-	 * @param args
-	 * @throws Exception
-	 */
+     * <h1>main function</h1>
+     * Entry point of the program, its only goal is to call the analyticsCounterSupervisor() method.
+     *
+     * @param args not used
+     * @throws Exception any exception without specific monitoring   
+     */
 	public static void main(String args[]) throws Exception {
-		AnalyticsCounterSupervisor();
+		analyticsCounterSupervisor();
 	}
 
 	/**
-	 * The 'analyticsCounterSupervisor()' monitors the application. 
-	 * It calls sequentially each principal function of the program:
-	 * 	- get the filepath of the file we want to read,
-	 * 	- read the file,
-	 * 	- count the occurrences of each symptom,
-	 * 	- generate the file output.
+     * <h1>Method analyticsCounterSupervisor()</h1>
+     * The 'analyticsCounterSupervisor()' monitors the application.
+     * It calls sequentially each principal function of the program:
+     * <ul>
+     * <li>get the filepath of the file we want to read,
+     * <li>read the file,
+     * <li>count the occurrences of each symptom,
+     * <li>generate the output file.
+	 * </ul>
 	 * 
-	 * @throws Exception
+	 * @throws Exception any exception without specific monitoring
 	 */
-	private static void AnalyticsCounterSupervisor() throws Exception {
-		/** First part: an external method call to get the filePath (still needs to be done)
-		 * The filepath variable is temporarily set here, until external method implementation.
-		 */
-		String filepath = "symptoms.txt";
-
-		/**Second part: Caroline's ReadSymptomDataFromFile sub-program call
-		 * In first we create an instance of ReadSymptomDataFromFile class with @param filepath.
-		 * Then we call the 'GetSymymptoms()' method.
-		 */
-		ISymptomReader readMyFile = new ReadSymptomDataFromFile(filepath);
-		List<String> result = readMyFile.GetSymptoms();
-
-		/** Part 3: Count the occurrences of each symptom  (still needs to be done)
-		 * For now it is only a small adaptation of Alex'job using 
-		 * the result List<String> returned by Caroline Class & method.
-		 */
-		ICountOccurrences countSymptomFromArray = new CountSymptomFromArray(result);
-		TreeMap<String,Integer> countResult = countSymptomFromArray.CountOccurrences();
-
-		/** Part 4: generate an output text file
-		 */
-		IWriteATreeMapInATextFile writeFile = new WriteCountResultInFile(countResult);
-		boolean fileCreated = writeFile.WriteInFile();
-		if (fileCreated) {
-			System.out.println("\n" + "File 'result.out' written.");
+	private static void analyticsCounterSupervisor() throws Exception {
+		//First part: choose the file to read. 
+		ISelectFileAndGetFilepath selectFileToRead = new SelectFileToRead();
+		String filepath = selectFileToRead.selectFile();
+		if (filepath.equals("")){
+			System.out.println("End of program.");
+			System.exit(0);
 		}else {
-			System.out.println("\n" + "Unable to write 'result.out'");			
+			System.out.println("Part 1 'SelectFileToRead' successfully done!");
+		}
+		
+		//Second part: Caroline's ReadSymptomDataFromFile sub-program call. 
+		ISymptomReader readSelectedFile = new ReadSymptomDataFromFile(filepath);
+		List<String> result = readSelectedFile.getSymptoms();
+		if (result.isEmpty()){
+			System.out.println("\n" + "Part 2!!!");
+			System.out.println("There is no data in " + filepath);
+			System.out.println("End of program.");
+			System.exit(0);
+		}else {
+			System.out.println("\n" + "Part 2 'ReadSymptomDataFromFile' successfully done!");
+		}
+		
+		// Part 3: Count the occurrences of each symptom. 
+		ICountOccurrences countSymptomsFromArray = new CountSymptomsFromArray(result);
+		TreeMap<String, Integer> countResult = countSymptomsFromArray.countOccurrences();
+		if (countResult.isEmpty()) {
+			System.out.println("\n" + "Part 3!!!");
+			System.out.println("The MapTree is empty");
+			System.out.println("End of program.");
+			System.exit(0);
+			
+		}else {
+			System.out.println("\n" + "Part 3 'CountSymptomFromArray' successfully done!");			
+		}
+		
+		// Part 4: generate an output text file 
+		IWriteATreeMapInATextFile writeCountResultInFile = new WriteCountResultInFile(countResult);
+		boolean fileCreated = writeCountResultInFile.writeInFile();
+		if (fileCreated) {
+			System.out.println("\n" + "Part 4 successfully done! File 'result.out' was written. ");
+		} else {
+			System.out.println("\n" + "Part 4!!!");
+			System.out.println("Unable to write 'result.out'");
+			System.out.println("Program is closed.");
 		}
 	}
-	
+
 }

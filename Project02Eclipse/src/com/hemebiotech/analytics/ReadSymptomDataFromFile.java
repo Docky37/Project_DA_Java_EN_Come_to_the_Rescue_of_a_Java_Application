@@ -7,30 +7,52 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Simple brute force implementation
- *
+ * <h1>ReadSymptomDataFromFile class</h1>
+ * <p>
+ * The ReadSymptomDataFromFile class can read a file that contains a listing of
+ * symptoms (one per line) and store it in an ArrayList.
+ * </p>
+ * 
+ * @author Caroline Hédot (Heme Biotech)
+ * @since 25-12-2019
  */
 public class ReadSymptomDataFromFile implements ISymptomReader {
 
 	private String filepath;
-	
+
 	/**
+	 * <h1>Constructor ReadSymptomDataFromFile(String filepath)</h1>
+	 * <p>
+	 * When the new instance of the ReadSymptomDataFromFile class is created, the
+	 * constructor set the String filepath private variable with the @param filepath
+	 * value.
+	 * </p>
 	 * 
-	 * @param filepath a full or partial path to file with symptom strings in it, one per line
+	 * @param filepath an absolute path giving the base location of the file with
+	 *                 symptom strings in it, one per line.
 	 */
-	public ReadSymptomDataFromFile (String filepath) {
+	public ReadSymptomDataFromFile(String filepath) {
 		this.filepath = filepath;
 	}
-	
+
+	/**
+	 * <h1>Method getSymptoms()</h1>
+	 * <p>
+	 * The method getSymptoms() read each line of the file (using BufferedReader and
+	 * FileReader classes) and store the String value of each line in a ArrayList.
+	 * </p>
+	 * 
+	 * @return the list of Strings
+	 */
 	@Override
-	public List<String> GetSymptoms() {
+	public List<String> getSymptoms() {
 		ArrayList<String> result = new ArrayList<String>();
-		
+
 		if (filepath != null) {
 			try {
-				BufferedReader reader = new BufferedReader (new FileReader(filepath));
+				BufferedReader reader = new BufferedReader(new FileReader(filepath));
 				String line = reader.readLine();
-				
+
 				while (line != null) {
 					result.add(line);
 					line = reader.readLine();
@@ -40,7 +62,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return result;
 	}
 
