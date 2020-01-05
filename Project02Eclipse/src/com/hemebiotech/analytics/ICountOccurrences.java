@@ -3,21 +3,25 @@ package com.hemebiotech.analytics;
 import java.util.TreeMap;
 
 /**
- * <h1>ICountOccurrences</h1>
+ * <h1>Interface ICountOccurrences</h1>
  * <p>
- * The ICountOccurrences interface contain one method that creates a TreeMap
- * (with a String Key and an Integer value) from a list (with duplicates).
+ * Implementing this Interface allows user to create a TreeMap (with a String
+ * key and an Integer value) from a list (with duplicates) for counting the
+ * occurrences of each key.
  * </p>
  * 
- * @author docky
+ * @author Thierry Schreiner (OpenClassrooms student)
+ * @since 26-12-2019
  */
 public interface ICountOccurrences {
 
 	/**
-	 * <h1>CountOccurrences()</h1>
+	 * <h1>Method countOccurrences()</h1>
 	 * <p>
-	 * Each different element of the list becomes a String key of a TreeMap</p>
-	 * <p>and the associated value of each key is the number of occurrences of the
+	 * Each different element of the list becomes a String key of a TreeMap
+	 * </p>
+	 * <p>
+	 * and the associated value of each key is the number of occurrences of the
 	 * element in the list.
 	 * </p>
 	 * 

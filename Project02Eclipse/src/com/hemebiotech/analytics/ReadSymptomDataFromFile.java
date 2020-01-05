@@ -13,30 +13,34 @@ import java.util.List;
  * symptoms (one per line) and store it in an ArrayList.
  * </p>
  * 
- * @author Caroline - Heme Biotech
- * 
+ * @author Caroline Hédot (Heme Biotech)
+ * @since 25-12-2019
  */
 public class ReadSymptomDataFromFile implements ISymptomReader {
 
 	private String filepath;
 
 	/**
-	 * <h1>Class constructor</h1>
-	 * When the new instance of the ReadSymptomDataFromFile class is created,
-	 * the constructor set the String filepath private variable with the @param
-	 * filepath value.
+	 * <h1>Constructor ReadSymptomDataFromFile(String filepath)</h1>
+	 * <p>
+	 * When the new instance of the ReadSymptomDataFromFile class is created, the
+	 * constructor set the String filepath private variable with the @param filepath
+	 * value.
+	 * </p>
 	 * 
-	 * @param filepath an absolute or relative path giving the base location of the
-	 *                 file with symptom strings in it, one per line.
+	 * @param filepath an absolute path giving the base location of the file with
+	 *                 symptom strings in it, one per line.
 	 */
 	public ReadSymptomDataFromFile(String filepath) {
 		this.filepath = filepath;
 	}
 
 	/**
-	 * <h1>GetSymptoms()</h1>
-	 * The GetSymptoms() method read each line of the file (using BufferedReader and
+	 * <h1>Method getSymptoms()</h1>
+	 * <p>
+	 * The method getSymptoms() read each line of the file (using BufferedReader and
 	 * FileReader classes) and store the String value of each line in a ArrayList.
+	 * </p>
 	 * 
 	 * @return the list of Strings
 	 */

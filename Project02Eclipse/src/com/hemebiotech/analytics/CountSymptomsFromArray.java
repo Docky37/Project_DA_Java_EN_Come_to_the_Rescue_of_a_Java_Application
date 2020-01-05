@@ -5,38 +5,41 @@ import java.util.ListIterator;
 import java.util.TreeMap;
 
 /**
- * The CountSymptomFromArray class creates a TreeMap (with a String key and an
- * Integer value) from the list previously created by the
- * ReadSymptomDataFromFile class. Each different symptom becomes a key of
- * the Map and the associated value of each key is the number of occurrences of
- * this symptom in the list.
+ * <h1>Class CountSymptomsFromArray</h1>
+ * <p>
+ * The Class CountSymptomFromArray, with the implementation of the interface
+ * ICountOccurrences, creates a TreeMap (with a String key and an Integer value)
+ * from the list previously created by the ReadSymptomDataFromFile class. Each
+ * different symptom becomes a key of the Map and the associated value of each
+ * key is the number of occurrences of this symptom in the list.
+ * </p>
  * 
- * @author docky
- * @since 25-12-2019
+ * @author Thierry Schreiner (OpenClassrooms student)
+ * @since 26-12-2019
  */
-public class CountSymptomFromArray implements ICountOccurrences {
+public class CountSymptomsFromArray implements ICountOccurrences {
 
 	private List<String> list;
-	
+
 	/**
-	 * <h1>CountSymptomFromArray(List&lt;String&gt; result)</h1>
+	 * <h1>Constructor CountSymptomsFromArray(List&lt;String&gt; result)</h1>
 	 * <p>
 	 * When the new instance of the CountSymptomFromArray class is created, the
-	 * constructor set the List&lt;String&gt; list private variable with the @param result
-	 * value.
+	 * constructor set the List&lt;String&gt; list private variable with the @param
+	 * result value.
 	 * </p>
 	 * 
 	 * @param result a list of symptoms previously created by the
 	 *               ReadSymptomDataFromFile class.
 	 */
-	public CountSymptomFromArray(List<String> result) {
+	public CountSymptomsFromArray(List<String> result) {
 		this.list = result;
 	}
-	
+
 	/**
-	 * <h1>CountOccurrences()</h1>
+	 * <h1>Method countOccurrences()</h1>
 	 * <p>
-	 * The CountOccurrences method read each symptom of the list.
+	 * The method countOccurrences read each symptom of the list.
 	 * </p>
 	 * <p>
 	 * If the map previously contained a mapping for the 'symptom', the old value is
@@ -67,6 +70,5 @@ public class CountSymptomFromArray implements ICountOccurrences {
 		return countResult;
 
 	}
-		
-	
+
 }
