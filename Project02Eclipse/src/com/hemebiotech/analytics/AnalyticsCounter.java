@@ -1,8 +1,7 @@
 package com.hemebiotech.analytics;
 
-import java.io.FileWriter;
 import java.util.List;
-import java.util.ListIterator;
+import java.util.TreeMap;
 
 /**
  * Main Class of the application, AnalyticsCounter contains: 
@@ -13,9 +12,6 @@ import java.util.ListIterator;
  *
  */
 public class AnalyticsCounter {
-	private static int headacheCount = 0; // initialize to 0
-	private static int rashCount = 0; // initialize to 0
-	private static int pupilCount = 0; // initialize to 0
 
 	/**
 	 * The main function, entry point of the program. 
@@ -25,7 +21,7 @@ public class AnalyticsCounter {
 	 * @throws Exception
 	 */
 	public static void main(String args[]) throws Exception {
-		analyticsCounterSupervisor();
+		AnalyticsCounterSupervisor();
 	}
 
 	/**
@@ -38,7 +34,7 @@ public class AnalyticsCounter {
 	 * 
 	 * @throws Exception
 	 */
-	private static void analyticsCounterSupervisor() throws Exception {
+	private static void AnalyticsCounterSupervisor() throws Exception {
 		/** First part: an external method call to get the filePath (still needs to be done)
 		 * The filepath variable is temporarily set here, until external method implementation.
 		 */
@@ -55,28 +51,18 @@ public class AnalyticsCounter {
 		 * For now it is only a small adaptation of Alex'job using 
 		 * the result List<String> returned by Caroline Class & method.
 		 */
-		ListIterator<String> iterator = result.listIterator();
-		String symptom;
-		while (iterator.hasNext()) {
-			symptom = iterator.next();
-			System.out.println("symptom from file: " + symptom);
-			if (symptom.equals("headache")) {
-				headacheCount++;
-			} else if (symptom.equals("rash")) {
-				rashCount++;
-			} else if (symptom.contains("pupils")) {
-				pupilCount++;
-			}
-		}
+		ICountOccurrences countSymptomFromArray = new CountSymptomFromArray(result);
+		TreeMap<String,Integer> countResult = countSymptomFromArray.CountOccurrences();
 
-		/** Part 4: generate output (Need to be rewrite)
+		/** Part 4: generate an output text file
 		 */
-		FileWriter writer = new FileWriter("result.out");
-		writer.write("headache: " + headacheCount + "\n");
-		writer.write("rash: " + rashCount + "\n");
-		writer.write("dialated pupils: " + pupilCount + "\n");
-		writer.close();
-
+		IWriteATreeMapInATextFile writeFile = new WriteCountResultInFile(countResult);
+		boolean fileCreated = writeFile.WriteInFile();
+		if (fileCreated) {
+			System.out.println("\n" + "File 'result.out' written.");
+		}else {
+			System.out.println("\n" + "Unable to write 'result.out'");			
+		}
 	}
-
+	
 }
