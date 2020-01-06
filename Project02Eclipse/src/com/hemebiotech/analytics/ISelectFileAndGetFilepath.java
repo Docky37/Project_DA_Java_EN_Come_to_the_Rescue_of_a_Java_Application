@@ -1,7 +1,7 @@
 package com.hemebiotech.analytics;
 
 /**
- * <h1>Interface ISelectFileAndGetFilepath</h1>
+ * <h1>Interface ISelectFileAndGetFilepath:</h1>
  * <p>
  * Implementing this Interface allows user to select a file and get its absolute
  * path.
@@ -13,10 +13,10 @@ package com.hemebiotech.analytics;
 public interface ISelectFileAndGetFilepath {
 
 	/**
-	 * <h1>Method selectFile()</h1>
+	 * <h1>Method selectFile:</h1>
 	 * <p>
-	 * The method SelectFile() creates a dialogue window that allows user to select
-	 * a file and get its absolute path.
+	 * This method creates a dialogue window that allows user to select a file and
+	 * get its absolute path.
 	 * </p>
 	 * 
 	 * @return String filepath of the selected file

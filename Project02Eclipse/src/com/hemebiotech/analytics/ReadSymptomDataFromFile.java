@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <h1>ReadSymptomDataFromFile class</h1>
+ * <h1>Class ReadSymptomDataFromFile:</h1>
  * <p>
- * The ReadSymptomDataFromFile class can read a file that contains a listing of
- * symptoms (one per line) and store it in an ArrayList.
+ * This class can read a file that contains a listing of symptoms (one per line)
+ * and store it in an ArrayList.
  * </p>
  * 
  * @author Caroline Hédot (Heme Biotech)
@@ -21,14 +21,14 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	private String filepath;
 
 	/**
-	 * <h1>Constructor ReadSymptomDataFromFile(String filepath)</h1>
+	 * <h1>Constructor ReadSymptomDataFromFile:</h1>
 	 * <p>
 	 * When the new instance of the ReadSymptomDataFromFile class is created, the
 	 * constructor set the String filepath private variable with the @param filepath
 	 * value.
 	 * </p>
 	 * 
-	 * @param filepath an absolute path giving the base location of the file with
+	 * @param filepath - an absolute path giving the base location of the file with
 	 *                 symptom strings in it, one per line.
 	 */
 	public ReadSymptomDataFromFile(String filepath) {
@@ -36,10 +36,10 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 	}
 
 	/**
-	 * <h1>Method getSymptoms()</h1>
+	 * <h1>Method getSymptoms:</h1>
 	 * <p>
-	 * The method getSymptoms() read each line of the file (using BufferedReader and
-	 * FileReader classes) and store the String value of each line in a ArrayList.
+	 * This method read each line of the file (using BufferedReader and FileReader
+	 * classes) and store the String value of each line into an ArrayList.
 	 * </p>
 	 * 
 	 * @return the list of Strings
@@ -52,14 +52,15 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 			try {
 				BufferedReader reader = new BufferedReader(new FileReader(filepath));
 				String line = reader.readLine();
-
 				while (line != null) {
 					result.add(line);
 					line = reader.readLine();
 				}
 				reader.close();
+				// A line to perform an IOException test
+				// IOException e = new IOException(); throw e;
 			} catch (IOException e) {
-				e.printStackTrace();
+				result = null;
 			}
 		}
 

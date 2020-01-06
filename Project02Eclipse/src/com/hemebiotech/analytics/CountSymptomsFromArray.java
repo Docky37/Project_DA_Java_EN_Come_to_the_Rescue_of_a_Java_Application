@@ -5,13 +5,13 @@ import java.util.ListIterator;
 import java.util.TreeMap;
 
 /**
- * <h1>Class CountSymptomsFromArray</h1>
+ * <h1>Class CountSymptomsFromArray:</h1>
  * <p>
- * The Class CountSymptomFromArray, with the implementation of the interface
- * ICountOccurrences, creates a TreeMap (with a String key and an Integer value)
- * from the list previously created by the ReadSymptomDataFromFile class. Each
- * different symptom becomes a key of the Map and the associated value of each
- * key is the number of occurrences of this symptom in the list.
+ * This class, with the implementation of the interface ICountOccurrences,
+ * creates a TreeMap (with a String key and an Integer value) from the list
+ * previously created by the ReadSymptomDataFromFile class. Each different
+ * symptom becomes a key of the Map and the associated value of each key is the
+ * number of occurrences of this symptom in the list.
  * </p>
  * 
  * @author Thierry Schreiner (OpenClassrooms student)
@@ -22,7 +22,7 @@ public class CountSymptomsFromArray implements ICountOccurrences {
 	private List<String> list;
 
 	/**
-	 * <h1>Constructor CountSymptomsFromArray(List&lt;String&gt; result)</h1>
+	 * <h1>Constructor CountSymptomsFromArray:</h1>
 	 * <p>
 	 * When the new instance of the CountSymptomFromArray class is created, the
 	 * constructor set the List&lt;String&gt; list private variable with the @param
@@ -37,9 +37,9 @@ public class CountSymptomsFromArray implements ICountOccurrences {
 	}
 
 	/**
-	 * <h1>Method countOccurrences()</h1>
+	 * <h1>Method countOccurrences:</h1>
 	 * <p>
-	 * The method countOccurrences read each symptom of the list.
+	 * This method read each symptom of the list.
 	 * </p>
 	 * <p>
 	 * If the map previously contained a mapping for the 'symptom', the old value is
