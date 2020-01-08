@@ -3,7 +3,7 @@ package com.hemebiotech.analytics;
 import java.util.TreeMap;
 
 /**
- * <h1>Interface ICountOccurrences</h1>
+ * <h1>Interface ICountOccurrences:</h1>
  * <p>
  * Implementing this Interface allows user to create a TreeMap (with a String
  * key and an Integer value) from a list (with duplicates) for counting the
@@ -16,7 +16,7 @@ import java.util.TreeMap;
 public interface ICountOccurrences {
 
 	/**
-	 * <h1>Method countOccurrences()</h1>
+	 * <h1>Method countOccurrences:</h1>
 	 * <p>
 	 * Each different element of the list becomes a String key of a TreeMap
 	 * </p>

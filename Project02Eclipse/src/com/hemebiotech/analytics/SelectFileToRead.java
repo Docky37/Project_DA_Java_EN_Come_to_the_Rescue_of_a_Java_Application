@@ -6,11 +6,10 @@ import java.io.IOException;
 import javax.swing.JFileChooser;
 
 /**
- * <h1>Class SelectFileToRead</h1>
+ * <h1>Class SelectFileToRead:</h1>
  * <p>
- * The Class SelectFileToRead with its implementation of the Interface
- * ISelectFileAndGetFilepath allows user to select a file and get its absolute
- * path.
+ * This class with its implementation of the Interface ISelectFileAndGetFilepath
+ * allows user to select a file and get its absolute path.
  * </p>
  * 
  * @author Thierry Schreiner (OpenClassrooms student)
@@ -19,16 +18,16 @@ import javax.swing.JFileChooser;
 public class SelectFileToRead implements ISelectFileAndGetFilepath {
 
 	/**
-	 * <h1>Method selectFile()</h1>
+	 * <h1>Method selectFile:</h1>
 	 * <p>
-	 * The method SelectFile() creates a dialogue window in the current directory (
-	 * in user's default directory if IOException.)
+	 * This method creates a dialogue window in the current directory (in user's
+	 * default directory if IOException.)
 	 * </p>
 	 * <p>
 	 * This window allows user to select a file and get its absolute path.
 	 * </p>
 	 * 
-	 * @return String filepath the absolute path of the selected file
+	 * @return String - the path of the selected file
 	 */
 	@Override
 	public String selectFile() {
@@ -36,7 +35,7 @@ public class SelectFileToRead implements ISelectFileAndGetFilepath {
 		File localDirectory = null;
 		try {
 			localDirectory = new File(".").getCanonicalFile();
-			System.out.println("Current directory: " + localDirectory);
+			// System.out.println("Current directory: " + localDirectory);
 		} catch (IOException e) {
 			// if IOException, localDirectory remains undefined
 		}
@@ -46,9 +45,9 @@ public class SelectFileToRead implements ISelectFileAndGetFilepath {
 			dialogue.showOpenDialog(null);
 
 			filePath = dialogue.getSelectedFile().getAbsolutePath();
-			System.out.println("Selected file: " + filePath + "\n");
+			// System.out.println("Selected file: " + filePath + "\n");
 		} catch (Exception e) {
-			System.out.println("\n" + "You don't choose any file!");
+			System.out.println("You don't choose any file!");
 		}
 		return filePath;
 
