@@ -15,6 +15,7 @@ import java.util.Scanner;
  * @author Alex (Heme Biotech) and Thierry Schreiner (OpenClassrooms student)
  * @since 26-12-2019
  * @version v1.3
+ * 
  */
 public class AnalyticsCounter {
 
@@ -22,6 +23,15 @@ public class AnalyticsCounter {
 	 * Scanner instance used to get keyboard entries.
 	 */
 	private Scanner sc = new Scanner(System.in);
+	private String externalMessage="";
+	
+	String getExternalMessage() {
+		return externalMessage;
+	}
+
+	void setExternalMessage(String externalMessage) {
+		this.externalMessage = externalMessage;
+	}
 
 	/**
 	 * <h1>Function main:</h1>
@@ -232,7 +242,7 @@ public class AnalyticsCounter {
 					+ "The program normally ends.";
 			break;
 		case 5:
-			message = "\n" + "Part 4!!! Unable to write in result.out! A read only file?";
+			message = "Unable to write in result.out!" + "\n";
 			break;
 		case 6:
 			message = "\n" + "Part 2!!!  Caution! An IOException occurred! We deleted unreliable datas!";
@@ -241,11 +251,13 @@ public class AnalyticsCounter {
 			message = "\n" + "Part 2!!!" + "There is no data in this file !";
 			break;
 		case 8:
-			message = "\n" + "Part 2 'ReadSymptomDataFromFile' successfully done!";
+			message = "\n" + "Part 2 'ReadSymptomDataFromFile' successfully done!" + "\n";
 			break;
 		case 9:
 			message = "\n" + "Part 3 'CountSymptomFromArray' successfully done!" + "\n";
 			break;
+		default:
+			message = "Message id error !";
 		}
 		System.out.println(message);
 	}

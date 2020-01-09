@@ -1,7 +1,6 @@
 package com.hemebiotech.analytics;
 
 import java.util.List;
-import java.util.ListIterator;
 import java.util.TreeMap;
 
 /**
@@ -54,21 +53,15 @@ public class CountSymptomsFromArray implements ICountOccurrences {
 	@Override
 	public TreeMap<String, Integer> countOccurrences() {
 		TreeMap<String, Integer> countResult = new TreeMap<>();
-
-		ListIterator<String> iterator = list.listIterator();
-		String occurrence;
-		int occurrenceNb = 0;
-		while (iterator.hasNext()) {
-			occurrence = iterator.next();
-			if (countResult.containsKey(occurrence)) {
-				occurrenceNb = countResult.get(occurrence) + 1;
+		list.forEach(item->{
+			if (countResult.containsKey(item)) {
+				countResult.put(item, countResult.get(item) + 1);
 			} else {
-				occurrenceNb = 1;
+				countResult.put(item, 1);
 			}
-			countResult.put(occurrence, occurrenceNb);
-		}
+			System.out.println(item +"= "+countResult.get(item));
+		});
 		return countResult;
-
 	}
 
 }
