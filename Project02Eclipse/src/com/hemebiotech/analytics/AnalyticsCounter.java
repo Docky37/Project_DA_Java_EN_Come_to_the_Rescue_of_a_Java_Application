@@ -13,8 +13,8 @@ import java.util.Scanner;
  * </ul>
  * 
  * @author Alex (Heme Biotech) and Thierry Schreiner (OpenClassrooms student)
- * @since 26-12-2019
- * @version v1.3
+ * @since 09-01-2020
+ * @version v1.4
  * 
  */
 public class AnalyticsCounter {
