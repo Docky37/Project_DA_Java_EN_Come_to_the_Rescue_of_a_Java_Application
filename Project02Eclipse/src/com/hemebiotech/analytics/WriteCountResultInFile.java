@@ -2,11 +2,7 @@ package com.hemebiotech.analytics;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.TreeMap;
-import java.util.Set;
-import java.util.Iterator;
 
 /**
  * <h1>Class WriteCountResultInFile:</h1>
@@ -22,7 +18,8 @@ import java.util.Iterator;
 public class WriteCountResultInFile implements IWriteATreeMapInATextFile {
 
 	TreeMap<String, Integer> countResult = new TreeMap<String, Integer>();
-
+	FileWriter writer = null;
+	boolean fileCreated = false;
 	/**
 	 * <h1>Class constructor:</h1>
 	 * <p>
@@ -51,21 +48,29 @@ public class WriteCountResultInFile implements IWriteATreeMapInATextFile {
 	 */
 	@Override
 	public boolean writeInFile() {
-		boolean fileCreated = false;
-		Set<Entry<String, Integer>> set = countResult.entrySet();
-		Iterator<Map.Entry<String, Integer>> it = set.iterator();
 		try {
-			FileWriter writer = new FileWriter("result.out");
-			while (it.hasNext()) {
-				Map.Entry<String, Integer> entry = it.next();
-				System.out.println(entry);
-				writer.write(entry.getKey() + ":   " + entry.getValue() + "\n");
+			writer = new FileWriter("result.out");
+			fileCreated = true;
+			countResult.forEach((k, v) -> {
+				try {
+					writer.write(k + ": " + v + "\n");
+					// A line to perform an IOException test
+					//IOException e = new IOException(); throw e;
+				} catch (IOException e) {
+					System.out.println("An IOException occurred when writting a line in the file!");
+					fileCreated = false;
+					return;
+				}
+			});
+			if (!fileCreated) {
+				return fileCreated;
 			}
 			writer.close();
-			fileCreated = true;
-		} catch (IOException e) {
-			fileCreated = false;
+		} catch (IOException e1) {
+			System.out.println(
+					"Part 4!!! An IOException occurred when we try to open the file! Check if it is not a read only file.");
 		}
+
 		return fileCreated;
 	}
 
