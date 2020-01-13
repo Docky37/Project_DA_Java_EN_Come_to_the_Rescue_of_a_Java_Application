@@ -53,14 +53,10 @@ public class CountSymptomsFromArray implements ICountOccurrences {
 	@Override
 	public TreeMap<String, Integer> countOccurrences() {
 		TreeMap<String, Integer> countResult = new TreeMap<>();
-		list.forEach(item->{
-			if (countResult.containsKey(item)) {
-				countResult.put(item, countResult.get(item) + 1);
-			} else {
-				countResult.put(item, 1);
-			}
+		for (String item : list) {
+			countResult.put(item, (countResult.containsKey(item)) ? countResult.get(item) + 1 : 1);
 			System.out.println(item +"= "+countResult.get(item));
-		});
+		}
 		return countResult;
 	}
 

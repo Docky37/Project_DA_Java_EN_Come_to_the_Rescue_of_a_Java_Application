@@ -49,14 +49,12 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 		ArrayList<String> result = new ArrayList<String>();
 
 		if (filepath != null) {
-			try {
-				BufferedReader reader = new BufferedReader(new FileReader(filepath));
+			try (BufferedReader reader = new BufferedReader(new FileReader(filepath))){
 				String line = reader.readLine();
 				while (line != null) {
 					result.add(line);
 					line = reader.readLine();
 				}
-				reader.close();
 				// A line to perform an IOException test
 				// IOException e = new IOException(); throw e;
 			} catch (IOException e) {
