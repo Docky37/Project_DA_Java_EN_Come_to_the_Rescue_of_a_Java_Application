@@ -35,9 +35,8 @@ public class SelectFileToRead implements ISelectFileAndGetFilepath {
 		File localDirectory = null;
 		try {
 			localDirectory = new File(".").getCanonicalFile();
-			// System.out.println("Current directory: " + localDirectory);
 		} catch (IOException e) {
-			// if IOException, localDirectory remains undefined
+			AnalyticsCounter.sendMessage(12);
 		}
 
 		try {
@@ -45,7 +44,6 @@ public class SelectFileToRead implements ISelectFileAndGetFilepath {
 			dialogue.showOpenDialog(null);
 
 			filePath = dialogue.getSelectedFile().getAbsolutePath();
-			// System.out.println("Selected file: " + filePath + "\n");
 		} catch (Exception e) {
 			System.out.println("You don't choose any file!");
 		}

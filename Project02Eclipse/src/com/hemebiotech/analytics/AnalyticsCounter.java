@@ -13,8 +13,8 @@ import java.util.Scanner;
  * </ul>
  * 
  * @author Alex (Heme Biotech) and Thierry Schreiner (OpenClassrooms student)
- * @since 09-01-2020
- * @version v1.4
+ * @since 14-01-2020
+ * @version v1.5
  * 
  */
 public class AnalyticsCounter {
@@ -23,15 +23,31 @@ public class AnalyticsCounter {
 	 * Scanner instance used to get keyboard entries.
 	 */
 	private Scanner sc = new Scanner(System.in);
-	private String externalMessage="";
-	
-	String getExternalMessage() {
-		return externalMessage;
-	}
 
-	void setExternalMessage(String externalMessage) {
-		this.externalMessage = externalMessage;
-	}
+	/**
+	 * Used to store all messages that the program can send to the console.
+	 */
+	private static String[] messages = {
+		"See you soon.",
+		"Ok, you have chosen to interrupt this function.",
+		"Without data at this step, this function stop.",
+		"Part 1 'SelectFileToRead' successfully done!",
+		"\n" + "Part 4 successfully done! File 'result.out' was written." + "\n" + "The program normally ends.",
+		"Unable to write in result.out!" + "\n",
+		"\n" + "Part 2!!!  Caution! An IOException occurred! We deleted unreliable datas!",
+		"\n" + "Part 2!!!" + "There is no data in this file !",
+		"\n" + "Part 2 'ReadSymptomDataFromFile' successfully done!" + "\n",
+		"\n" + "Part 3 'CountSymptomFromArray' successfully done!" + "\n",
+		"Part 4!!! An IOException occurred when writing in the file!",
+		"Part 4!!! An IOException occurred when we try to open the file! Check if it is not a read only file.",
+		"Unable to find current directory, dialogue window opens in user's directory."
+	};
+	
+	/**
+	 * This final char value is used to recognize a YES answer in the
+	 * questionYesOrNo(String question)method.
+	 */
+	private final char YES ='Y';
 
 	/**
 	 * <h1>Function main:</h1>
@@ -46,7 +62,7 @@ public class AnalyticsCounter {
 	public static void main(String args[]) throws Exception {
 		AnalyticsCounter analyticsCounter = new AnalyticsCounter();
 		analyticsCounter.analyticsCounterSupervisor();
-		System.out.println("See you soon.");
+		sendMessage(0);
 	}
 
 	/**
@@ -212,7 +228,7 @@ public class AnalyticsCounter {
 			str = str.toUpperCase();
 			keybordAnswer = str.charAt(0);
 		} while (keybordAnswer != 'Y' && keybordAnswer != 'N');
-		if (keybordAnswer == 'Y')
+		if (keybordAnswer == YES)
 			answer = true;
 		return answer;
 	}
@@ -225,40 +241,7 @@ public class AnalyticsCounter {
 	 * 
 	 * @param mes int - an id associated with a message to print
 	 */
-	public void sendMessage(int mes) {
-		String message = "";
-		switch (mes) {
-		case 1:
-			message = "Ok, you have chosen to interrupt this function.";
-			break;
-		case 2:
-			message = "Without data at this step, this function stop.";
-			break;
-		case 3:
-			message = "Part 1 'SelectFileToRead' successfully done!";
-			break;
-		case 4:
-			message = "\n" + "Part 4 successfully done! File 'result.out' was written." + "\n"
-					+ "The program normally ends.";
-			break;
-		case 5:
-			message = "Unable to write in result.out!" + "\n";
-			break;
-		case 6:
-			message = "\n" + "Part 2!!!  Caution! An IOException occurred! We deleted unreliable datas!";
-			break;
-		case 7:
-			message = "\n" + "Part 2!!!" + "There is no data in this file !";
-			break;
-		case 8:
-			message = "\n" + "Part 2 'ReadSymptomDataFromFile' successfully done!" + "\n";
-			break;
-		case 9:
-			message = "\n" + "Part 3 'CountSymptomFromArray' successfully done!" + "\n";
-			break;
-		default:
-			message = "Message id error !";
-		}
-		System.out.println(message);
+	public static void sendMessage(int mes) {
+		System.out.println(messages[mes]);	
 	}
 }
