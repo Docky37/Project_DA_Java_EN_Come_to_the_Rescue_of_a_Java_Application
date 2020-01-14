@@ -1,8 +1,14 @@
 package com.hemebiotech.analytics;
 
-import java.util.List;
-import java.util.TreeMap;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * <h1>Class AnalyticsCounter:</h1> Main Class of the application,
@@ -14,11 +20,10 @@ import java.util.Scanner;
  * 
  * @author Alex (Heme Biotech) and Thierry Schreiner (OpenClassrooms student)
  * @since 14-01-2020
- * @version v1.5
+ * @version v1.6
  * 
  */
 public class AnalyticsCounter {
-
 	/**
 	 * Scanner instance used to get keyboard entries.
 	 */
@@ -27,27 +32,28 @@ public class AnalyticsCounter {
 	/**
 	 * Used to store all messages that the program can send to the console.
 	 */
-	private static String[] messages = {
-		"See you soon.",
-		"Ok, you have chosen to interrupt this function.",
-		"Without data at this step, this function stop.",
-		"Part 1 'SelectFileToRead' successfully done!",
-		"\n" + "Part 4 successfully done! File 'result.out' was written." + "\n" + "The program normally ends.",
-		"Unable to write in result.out!" + "\n",
-		"\n" + "Part 2!!!  Caution! An IOException occurred! We deleted unreliable datas!",
-		"\n" + "Part 2!!!" + "There is no data in this file !",
-		"\n" + "Part 2 'ReadSymptomDataFromFile' successfully done!" + "\n",
-		"\n" + "Part 3 'CountSymptomFromArray' successfully done!" + "\n",
-		"Part 4!!! An IOException occurred when writing in the file!",
-		"Part 4!!! An IOException occurred when we try to open the file! Check if it is not a read only file.",
-		"Unable to find current directory, dialogue window opens in user's directory."
-	};
-	
+	private static String[] messages = { "See you soon.", "Ok, you have chosen to interrupt this function.",
+			"Without data at this step, this function stop.", "Part 1 'SelectFileToRead' successfully done!",
+			"\n" + "Part 3 successfully done! File 'result.out' was written." + "\n" + "The program normally ends.",
+			"Unable to write in result.out!" + "\n",
+			"\n" + "Part 2!!!  Caution! An Exception occurred!",
+			"But, there is no data in this file! ",
+			"\n" + "Part 2 'readAndCountWithStream' successfully done!" + "\n",
+			"\n" + "Part 2 'CountSymptomFromArray' successfully done!" + "\n",
+			"\n" + "Part 3!!! An IOException occurred when writing in the file!",
+			"\n" + "Part 3!!! An IOException occurred when we try to open the file! Check if it is not a read only file.",
+			"Unable to find current directory, dialogue window opens in user's directory." };
+
+	/**
+	 * The Map &lt;String,Long&gt; used to collect the count of each symptom.
+	 */
+	TreeMap<String, Long> countResult;
+
 	/**
 	 * This final char value is used to recognize a YES answer in the
 	 * questionYesOrNo(String question)method.
 	 */
-	private final char YES ='Y';
+	private final char YES = 'Y';
 
 	/**
 	 * <h1>Function main:</h1>
@@ -59,7 +65,7 @@ public class AnalyticsCounter {
 	 * @param args not used
 	 * @throws Exception any exception without specific monitoring
 	 */
-	public static void main(String args[]) throws Exception {
+	public static void main(String[] args) throws Exception {
 		AnalyticsCounter analyticsCounter = new AnalyticsCounter();
 		analyticsCounter.analyticsCounterSupervisor();
 		sendMessage(0);
@@ -73,8 +79,7 @@ public class AnalyticsCounter {
 	 * </p>
 	 * <ul>
 	 * <li>get the filepath of the file we want to read,
-	 * <li>read the file,
-	 * <li>count the occurrences of each symptom,
+	 * <li>read and count the occurrences of each symptom,
 	 * <li>generate the output file.
 	 * </ul>
 	 * 
@@ -96,27 +101,17 @@ public class AnalyticsCounter {
 			sendMessage(3);
 		}
 
-		// Second part: Caroline's ReadSymptomDataFromFile sub-program call.
-		List<String> result;
-		do {
-			result = readTheFile(filepath);
-			if (result == null) {
-				answer = questionYesOrNo("Retry to read the file (Y or N)?");
-				if (!answer) {
-					sendMessage(1);
-					return;
-				}
-			}
-		} while (result == null);
-		if (result.isEmpty()) {
-			sendMessage(2);
-			sc.close();
+		/* Part 2:
+		 * This new Second part replaces old Part 2 and 3, ReadSymptomDataFromFile and
+		 * CountSymptomsFromArray are no longer useful.
+		 */
+		readAndCountWithStream(filepath);
+		if (countResult.isEmpty()) {
+			sendMessage(7);
 			return;
 		}
-		// Part 3: Count the occurrences of each symptom.
-		TreeMap<String, Integer> countResult = countOccurencesFromArray(result);
-
-		// Part 4: Generate an output text file
+		
+		// Part 3: Generate an output text file
 		boolean fileCreated=false;
 		do {
 			fileCreated = writeATreeMapInATextFile(countResult);
@@ -149,47 +144,23 @@ public class AnalyticsCounter {
 	}
 
 	/**
-	 * <h1>Method readTheFile:</h1>
-	 * <p>
-	 * This method created an instance of the class ReadSymptomDataFromFile and call
-	 * its method getSymptoms() to make a List&lt;String&gt; of its content..
-	 * </p>
-	 * *
-	 * 
-	 * @param filepath the path of the file to read
-	 * @return a List&lt;String&gt; - the ArrayList of symptoms read in the file
+	 * Method readAndCountWithStream
+	 * This method use the method lines() in Files class to read a file, line by line as Stream of String
+	 * and then use a groupingBy collector to create the TreeMap we need from the Stream.  
+	 * @param filepath String - the path of the selected file
 	 */
-	public List<String> readTheFile(String filepath) {
-		ISymptomReader readSelectedFile = new ReadSymptomDataFromFile(filepath);
-		List<String> result = readSelectedFile.getSymptoms();
-		if (result == null) {
-			sendMessage(6);
-		} else if (result.isEmpty()) {
-			sendMessage(7);
-		} else {
+	public void readAndCountWithStream(String filepath) {
+		try (Stream<String> symptomsStream = Files.lines(Paths.get(filepath))) {
+			countResult = symptomsStream
+				.collect(Collectors.groupingBy(Function.identity(), TreeMap::new, Collectors.counting()));
+			sendMessage(8);
+			for (Map.Entry<String, Long> kV : countResult.entrySet()) {
+				System.out.println(kV.getKey() + "= " + kV.getValue());
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 			sendMessage(8);
 		}
-		return result;
-	}
-
-	/**
-	 * <h1>Method countOccurencesFromArray:</h1>
-	 * <p>
-	 * This method created an instance of the class CountSymptomsFromArray and call
-	 * its method countOccurrences() to make a TreeMap&lt;String, Integer&gt; that
-	 * stores each key with an associated value equal to the number of occurrences
-	 * of the key in the @param list.
-	 * </p>
-	 * 
-	 * @param result a List of string with duplicates
-	 * @return a TreeMap&lt;String, Integer&gt; - the TreeMap that contains the
-	 *         count of symptoms
-	 */
-	public TreeMap<String, Integer> countOccurencesFromArray(List<String> result) {
-		ICountOccurrences countSymptomsFromArray = new CountSymptomsFromArray(result);
-		TreeMap<String, Integer> countResult = countSymptomsFromArray.countOccurrences();
-		sendMessage(9);
-		return countResult;
 	}
 
 	/**
@@ -203,7 +174,7 @@ public class AnalyticsCounter {
 	 * @param countResult a TreeMap&lt;String, Integer&gt; -
 	 * @return a boolean - true if the file is written.
 	 */
-	public boolean writeATreeMapInATextFile(TreeMap<String, Integer> countResult) {
+	public boolean writeATreeMapInATextFile(TreeMap<String, Long> countResult) {
 		IWriteATreeMapInATextFile writeCountResultInFile = new WriteCountResultInFile(countResult);
 		boolean fileCreated = writeCountResultInFile.writeInFile();
 		return fileCreated;

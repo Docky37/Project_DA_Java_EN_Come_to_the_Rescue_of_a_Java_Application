@@ -18,7 +18,7 @@ import java.util.TreeMap;
  */
 public class WriteCountResultInFile implements IWriteATreeMapInATextFile {
 
-	TreeMap<String, Integer> countResult = new TreeMap<String, Integer>();
+	TreeMap<String, Long> countResult = new TreeMap<>();
 	boolean fileCreated = false;
 	/**
 	 * <h1>Class constructor:</h1>
@@ -29,7 +29,7 @@ public class WriteCountResultInFile implements IWriteATreeMapInATextFile {
 	 * 
 	 * @param countResult - the TreeMap created by CountSymptomFromArray Class
 	 */
-	public WriteCountResultInFile(TreeMap<String, Integer> countResult) {
+	public WriteCountResultInFile(TreeMap<String, Long> countResult) {
 		this.countResult = countResult;
 	}
 
@@ -49,7 +49,7 @@ public class WriteCountResultInFile implements IWriteATreeMapInATextFile {
 	public boolean writeInFile() {
 		try (FileWriter writer = new FileWriter("result.out")){
 			fileCreated = true;
-			for (Map.Entry<String, Integer> kV : countResult.entrySet()) {
+			for (Map.Entry<String, Long> kV : countResult.entrySet()) {
 				try {
 					writer.write(kV.getKey() + ": " + kV.getValue() + "\n");
 				} catch (IOException e) {
